@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Shawn’s Godot Arcade</title>
+  <meta name="description" content="A collection of web games made in Godot." />
+
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #0b0d12;
+      color: #e9eef7;
+    }
+    header {
+      padding: 28px 18px 12px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    header h1 { margin: 0 0 6px; font-size: 28px; }
+    header p { margin: 0; opacity: 0.85; line-height: 1.4; }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 18px; }
+
+    .topbar {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .search {
+      flex: 1;
+      min-width: 240px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      background: #111522;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 10px 12px;
+    }
+    .search input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #e9eef7;
+      font-size: 14px;
+    }
+
+    .player {
+      background: #0f1320;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+    .player-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      flex-wrap: wrap;
+    }
+    .player-title { font-weight: 650; }
+    .player-actions { display: flex; gap: 8px; align-items: center; }
+    .btn {
+      cursor: pointer;
+      background: #1b2340;
+      border: 1px solid rgba(255,255,255,0.10);
+      color: #e9eef7;
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+    .btn:hover { filter: brightness(1.1); }
+    .btn:active { transform: translateY(1px); }
+
+    /* Responsive 16:9-ish player */
+    .player-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border: 0;
+      display: block;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .card {
+      background: #0f1320;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.12s ease, border-color 0.12s ease;
+    }
+    .card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.18); }
+    .thumb {
+      width: 100%;
+      height: 140px;
+      background: #111;
+      object-fit: cover;
+      display: block;
+    }
+    .card-body { padding: 12px; }
+    .card h3 { margin: 0 0 6px; font-size: 16px; }
+    .card p { margin: 0 0 10px; opacity: 0.82; font-size: 13px; line-height: 1.35; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      opacity: 0.92;
+    }
+
+    footer {
+      opacity: 0.7;
+      padding: 26px 18px 40px;
+      text-align: center;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Shawn’s Godot Arcade</h1>
+    <p>Click a game card to play. Works on desktop + mobile (as long as the game export supports it).</p>
+  </header>
+
+  <div class="wrap">
+    <div class="topbar">
+      <div class="search">
+        <span aria-hidden="true">🔎</span>
+        <input id="search" type="search" placeholder="Search games (title, tags)..." />
+      </div>
+      <div style="opacity:.75;font-size:13px" id="count"></div>
+    </div>
+
+    <section class="player" aria-label="Game player">
+      <div class="player-header">
+        <div class="player-title" id="playerTitle">Select a game to play</div>
+        <div class="player-actions">
+          <button class="btn" id="openNewTab" disabled>Open in new tab</button>
+          <button class="btn" id="clearGame" disabled>Close</button>
+        </div>
+      </div>
+      <iframe
+        id="playerFrame"
+        class="player-frame"
+        title="Game player"
+        allow="fullscreen; gamepad; autoplay"
+        referrerpolicy="no-referrer"
+      ></iframe>
+    </section>
+
+    <section>
+      <div class="grid" id="grid" aria-label="Game list"></div>
+    </section>
+  </div>
+
+  <footer>
+    Built with Godot + GitHub Pages.
+  </footer>
+
+  <script>
+    // ------------------------------------------------------------
+    // 1) EDIT THIS LIST to add your games
+    //    url should point to each game's exported index.html
+    // ------------------------------------------------------------
+    const games = [
+      {
+        id: "hold-on",
+        title: "Hold On",
+        desc: "Stay on the raft. Don’t get eaten.",
+        url: "./games/hold-on/index.html",
+        thumb: "./assets/thumbs/hold-on.jpg",
+        tags: ["arcade", "skill", "prototype"]
+      },
+      {
+        id: "asteroid-miner",
+        title: "Asteroid Miner",
+        desc: "Capture rocks, manage upgrades, survive.",
+        url: "./games/asteroid-miner/index.html",
+        thumb: "./assets/thumbs/asteroid-miner.jpg",
+        tags: ["strategy", "sci-fi", "godot"]
+      }
+    ];
+
+    // ------------------------------------------------------------
+    // 2) Render grid
+    // ------------------------------------------------------------
+    const grid = document.getElementById("grid");
+    const search = document.getElementById("search");
+    const count = document.getElementById("count");
+
+    const playerTitle = document.getElementById("playerTitle");
+    const playerFrame = document.getElementById("playerFrame");
+    const openNewTab = document.getElementById("openNewTab");
+    const clearGame = document.getElementById("clearGame");
+
+    function render(list) {
+      grid.innerHTML = "";
+      count.textContent = `${list.length} game${list.length === 1 ? "" : "s"}`;
+
+      for (const g of list) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.tabIndex = 0;
+        card.role = "button";
+        card.ariaLabel = `Play ${g.title}`;
+
+        card.innerHTML = `
+          <img class="thumb" src="${g.thumb}" alt="${g.title} thumbnail" loading="lazy">
+          <div class="card-body">
+            <h3>${g.title}</h3>
+            <p>${g.desc}</p>
+            <div class="tags">
+              ${(g.tags || []).map(t => `<span class="tag">${t}</span>`).join("")}
+            </div>
+          </div>
+        `;
+
+        const play = () => loadGame(g);
+        card.addEventListener("click", play);
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); }
+        });
+
+        grid.appendChild(card);
+      }
+    }
+
+    // ------------------------------------------------------------
+    // 3) Load selected game into iframe
+    // ------------------------------------------------------------
+    function loadGame(g) {
+      playerTitle.textContent = `Now playing: ${g.title}`;
+      playerFrame.src = g.url;
+
+      openNewTab.disabled = false;
+      clearGame.disabled = false;
+
+      openNewTab.onclick = () => window.open(g.url, "_blank", "noopener,noreferrer");
+      clearGame.onclick = () => {
+        playerFrame.src = "";
+        playerTitle.textContent = "Select a game to play";
+        openNewTab.disabled = true;
+        clearGame.disabled = true;
+      };
+
+      // Scroll player into view on mobile
+      document.querySelector(".player").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    // ------------------------------------------------------------
+    // 4) Search filter
+    // ------------------------------------------------------------
+    function filterGames(q) {
+      q = q.trim().toLowerCase();
+      if (!q) return games;
+
+      return games.filter(g => {
+        const hay = `${g.title} ${(g.tags || []).join(" ")} ${g.desc}`.toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    search.addEventListener("input", () => render(filterGames(search.value)));
+
+    render(games);
+  </script>
+</body>
+</html>
