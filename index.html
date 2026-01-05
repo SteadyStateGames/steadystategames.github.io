@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Shawn’s Godot Arcade</title>
-  <meta name="description" content="A collection of web games made in Godot." />
+  <title>SteadyStateGames Arcade</title>
+  <meta name="description" content="A collection of web games made in Godot by SteadyStateGames." />
 
   <style>
     :root { color-scheme: dark; }
@@ -103,9 +103,9 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
       overflow: hidden;
-      cursor: pointer;
       transition: transform 0.12s ease, border-color 0.12s ease;
     }
+    .card.is-clickable { cursor: pointer; }
     .card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.18); }
     .thumb {
       width: 100%;
@@ -117,6 +117,7 @@
     .card-body { padding: 12px; }
     .card h3 { margin: 0 0 6px; font-size: 16px; }
     .card p { margin: 0 0 10px; opacity: 0.82; font-size: 13px; line-height: 1.35; }
+    .card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 8px; }
     .tags { display: flex; flex-wrap: wrap; gap: 6px; }
     .tag {
       font-size: 12px;
@@ -138,8 +139,8 @@
 
 <body>
   <header>
-    <h1>Shawn’s Godot Arcade</h1>
-    <p>Click a game card to play. Works on desktop + mobile (as long as the game export supports it).</p>
+    <h1>SteadyStateGames Arcade</h1>
+    <p>Play tiny hosted games instantly, or jump to larger builds on itch.io.</p>
   </header>
 
   <div class="wrap">
@@ -187,17 +188,18 @@
         id: "hold-on",
         title: "Hold On",
         desc: "Stay on the raft. Don’t get eaten.",
-        url: "./games/hold-on/index.html",
+        playUrl: "./games/hold-on/index.html",
         thumb: "./assets/thumbs/hold-on.jpg",
-        tags: ["arcade", "skill", "prototype"]
+        tags: ["arcade", "skill", "prototype", "hosted"]
       },
       {
         id: "asteroid-miner",
         title: "Asteroid Miner",
         desc: "Capture rocks, manage upgrades, survive.",
-        url: "./games/asteroid-miner/index.html",
+        playUrl: "./games/asteroid-miner/index.html",
+        externalUrl: "https://itch.io/",
         thumb: "./assets/thumbs/asteroid-miner.jpg",
-        tags: ["strategy", "sci-fi", "godot"]
+        tags: ["strategy", "sci-fi", "godot", "hosted", "itch"]
       }
     ];
 
@@ -219,30 +221,47 @@
 
       for (const g of list) {
         const card = document.createElement("div");
-        card.className = "card";
-        card.tabIndex = 0;
-        card.role = "button";
-        card.ariaLabel = `Play ${g.title}`;
+        const clickable = Boolean(g.playUrl);
+        card.className = `card${clickable ? " is-clickable" : ""}`;
+        if (clickable) {
+          card.tabIndex = 0;
+          card.role = "button";
+          card.ariaLabel = `Play ${g.title}`;
+        }
 
         card.innerHTML = `
           <img class="thumb" src="${g.thumb}" alt="${g.title} thumbnail" loading="lazy">
           <div class="card-body">
             <h3>${g.title}</h3>
             <p>${g.desc}</p>
+            <div class="card-actions">
+              ${g.playUrl ? `<button class="btn" data-play="${g.id}">Play here</button>` : ""}
+              ${g.externalUrl ? `<a class="btn" href="${g.externalUrl}" target="_blank" rel="noopener noreferrer">View on itch.io</a>` : ""}
+            </div>
             <div class="tags">
               ${(g.tags || []).map(t => `<span class="tag">${t}</span>`).join("")}
             </div>
           </div>
         `;
 
-        const play = () => loadGame(g);
-        card.addEventListener("click", play);
-        card.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); }
-        });
+        if (g.playUrl) {
+          const play = () => loadGame(g);
+          card.addEventListener("click", play);
+          card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); }
+          });
+        }
 
         grid.appendChild(card);
       }
+
+      grid.querySelectorAll("[data-play]").forEach((btn) => {
+        btn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const targetGame = list.find((game) => game.id === btn.dataset.play);
+          if (targetGame) loadGame(targetGame);
+        });
+      });
     }
 
     // ------------------------------------------------------------
@@ -250,12 +269,12 @@
     // ------------------------------------------------------------
     function loadGame(g) {
       playerTitle.textContent = `Now playing: ${g.title}`;
-      playerFrame.src = g.url;
+      playerFrame.src = g.playUrl;
 
       openNewTab.disabled = false;
       clearGame.disabled = false;
 
-      openNewTab.onclick = () => window.open(g.url, "_blank", "noopener,noreferrer");
+      openNewTab.onclick = () => window.open(g.playUrl, "_blank", "noopener,noreferrer");
       clearGame.onclick = () => {
         playerFrame.src = "";
         playerTitle.textContent = "Select a game to play";
