@@ -8,7 +8,7 @@ function filterGames() {
   const query = search.value.trim().toLocaleLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
   let visible = 0;
   for (const card of cards) {
-    const text = `${card.dataset.search} ${card.querySelector('h3').textContent}`.toLocaleLowerCase();
+    const text = `${card.dataset.search} ${card.querySelector('h2').textContent}`.toLocaleLowerCase();
     card.hidden = !query.split(/\s+/).every(word => text.includes(word));
     if (!card.hidden) visible++;
   }
