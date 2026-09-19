@@ -1,307 +1,109 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SteadyStateGames Arcade</title>
-  <meta name="description" content="A collection of web games made in Godot by SteadyStateGames." />
-
-  <style>
-    :root { color-scheme: dark; }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #0b0d12;
-      color: #e9eef7;
-    }
-    header {
-      padding: 28px 18px 12px;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    header h1 { margin: 0 0 6px; font-size: 28px; }
-    header p { margin: 0; opacity: 0.85; line-height: 1.4; }
-
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 18px; }
-
-    .topbar {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      flex-wrap: wrap;
-    }
-
-    .search {
-      flex: 1;
-      min-width: 240px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      background: #111522;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 10px 12px;
-    }
-    .search input {
-      width: 100%;
-      background: transparent;
-      border: none;
-      outline: none;
-      color: #e9eef7;
-      font-size: 14px;
-    }
-
-    .player {
-      background: #0f1320;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 18px;
-    }
-    .player-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 12px;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-      flex-wrap: wrap;
-    }
-    .player-title { font-weight: 650; }
-    .player-actions { display: flex; gap: 8px; align-items: center; }
-    .btn {
-      cursor: pointer;
-      background: #1b2340;
-      border: 1px solid rgba(255,255,255,0.10);
-      color: #e9eef7;
-      padding: 8px 10px;
-      border-radius: 10px;
-      font-size: 13px;
-    }
-    .btn:hover { filter: brightness(1.1); }
-    .btn:active { transform: translateY(1px); }
-
-    /* Responsive 16:9-ish player */
-    .player-frame {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background: #000;
-      border: 0;
-      display: block;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 14px;
-    }
-    .card {
-      background: #0f1320;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: transform 0.12s ease, border-color 0.12s ease;
-    }
-    .card.is-clickable { cursor: pointer; }
-    .card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.18); }
-    .thumb {
-      width: 100%;
-      height: 140px;
-      background: #111;
-      object-fit: cover;
-      display: block;
-    }
-    .card-body { padding: 12px; }
-    .card h3 { margin: 0 0 6px; font-size: 16px; }
-    .card p { margin: 0 0 10px; opacity: 0.82; font-size: 13px; line-height: 1.35; }
-    .card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 8px; }
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag {
-      font-size: 12px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      opacity: 0.92;
-    }
-
-    footer {
-      opacity: 0.7;
-      padding: 26px 18px 40px;
-      text-align: center;
-      font-size: 13px;
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Steady State Games — Let's play.</title>
+  <meta name="description" content="Play Barrage Blockade, Solitaire, and Stephanie’s Colorful Crafting. All the games from Steady State Games, with direct browser and itch.io links.">
+  <meta name="theme-color" content="#151716">
+  <link rel="canonical" href="https://steadystategames.dev/">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
-  <header>
-    <h1>SteadyStateGames Arcade</h1>
-    <p>Play tiny hosted games instantly, or jump to larger builds on itch.io.</p>
-  </header>
-
-  <div class="wrap">
-    <div class="topbar">
-      <div class="search">
-        <span aria-hidden="true">🔎</span>
-        <input id="search" type="search" placeholder="Search games (title, tags)..." />
-      </div>
-      <div style="opacity:.75;font-size:13px" id="count"></div>
-    </div>
-
-    <section class="player" aria-label="Game player">
-      <div class="player-header">
-        <div class="player-title" id="playerTitle">Select a game to play</div>
-        <div class="player-actions">
-          <button class="btn" id="openNewTab" disabled>Open in new tab</button>
-          <button class="btn" id="clearGame" disabled>Close</button>
+  <a class="skip-link" href="#games">Skip to games</a>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Steady State Games home">
+        <svg class="brand-mark" width="40" height="40" viewBox="0 0 40 40" aria-hidden="true"><rect width="40" height="40" rx="10" fill="currentColor"/><path d="M10 14h20v5H15v3h15v5H10v-5h15v-3H10z" fill="#151716"/></svg>
+        <span>STEADY STATE<span class="brand-bottom">GAMES</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a href="#games" class="nav-current" aria-current="page">Games</a>
+        <a href="https://steadystategames.itch.io/">itch.io <span aria-hidden="true">↗</span></a>
+        <a href="https://github.com/SteadyStateGames">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> THE STEADY STATE ARCADE</p>
+          <h1 id="page-title">Let’s play<span class="accent">.</span></h1>
+          <p class="intro-copy">Pick a game. Play in your browser or find it on itch.io.</p>
         </div>
-      </div>
-      <iframe
-        id="playerFrame"
-        class="player-frame"
-        title="Game player"
-        allow="fullscreen; gamepad; autoplay"
-        referrerpolicy="no-referrer"
-      ></iframe>
-    </section>
-
-    <section>
-      <div class="grid" id="grid" aria-label="Game list"></div>
-    </section>
+        <div class="intro-decoration" aria-hidden="true"><span>+</span><span>●</span><span>↗</span><span>◆</span></div>
+      </section>
+      <section id="games" aria-labelledby="collection-heading">
+        <div class="collection-bar">
+          <h2 id="collection-heading">The collection <span id="count">03</span></h2>
+          <label class="search" hidden>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></svg>
+            <span class="sr-only">Search games</span>
+            <input type="search" id="search" placeholder="Find a game…" autocomplete="off">
+          </label>
+        </div>
+        <div class="game-grid">
+          <article class="game-card" data-search="barrage blockade arcade action portrait">
+            <a class="artwork barrage-art" href="https://steadystategames.dev/Barrage-Blockade/" aria-label="Play Barrage Blockade">
+              <span class="art-index" aria-hidden="true">01 / ARCADE</span>
+              <div class="barrage-lockup" aria-hidden="true"><img src="assets/barrage-blockade.png" alt="" width="512" height="512"><span>BARRAGE<br>BLOCKADE</span></div>
+              <span class="art-launch" aria-hidden="true">↗</span>
+            </a>
+            <div class="card-body">
+              <p class="category">ARCADE <span>·</span> ACTION</p>
+              <h3>Barrage Blockade</h3>
+              <p class="description">Bring your arsenal. Break through the blockade.</p>
+              <div class="card-actions">
+                <a class="play-button" href="https://steadystategames.dev/Barrage-Blockade/" aria-label="Play Barrage Blockade in your browser"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 2.5v11L13 8z" fill="currentColor"/></svg> Play now</a>
+                <span class="platform">Browser game</span>
+              </div>
+            </div>
+          </article>
+          <article class="game-card" data-search="solitaire cards card classic relaxing spider klondike freecell">
+            <a class="artwork solitaire-art" href="https://steadystategames.dev/SolitaireForMyBeautifulWife/" aria-label="Play Solitaire">
+              <span class="art-index" aria-hidden="true">02 / CARDS</span>
+              <img class="solitaire-icon" src="assets/solitaire.png" alt="" width="180" height="180">
+              <span class="solitaire-wordmark" aria-hidden="true">Solitaire</span>
+              <span class="art-launch" aria-hidden="true">↗</span>
+            </a>
+            <div class="card-body">
+              <p class="category">CARDS <span>·</span> CLASSIC</p>
+              <h3>Solitaire</h3>
+              <p class="description">Six classic solitaire games. Made for someone I love.</p>
+              <div class="card-actions">
+                <a class="play-button" href="https://steadystategames.dev/SolitaireForMyBeautifulWife/" aria-label="Play Solitaire in your browser"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 2.5v11L13 8z" fill="currentColor"/></svg> Play now</a>
+                <a class="itch-link" href="https://steadystategames.itch.io/soliatire" aria-label="Solitaire on itch.io">itch.io <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+          <article class="game-card" data-search="stephanie colorful colourful crafting color colour mixing puzzle relaxing">
+            <a class="artwork crafting-art" href="https://steadystategames.dev/Stephanie-s-Colorful-Crafting/" aria-label="Play Stephanie’s Colorful Crafting">
+              <span class="art-index" aria-hidden="true">03 / PUZZLE</span>
+              <img class="crafting-icon" src="assets/colorful-crafting.png" alt="" width="512" height="512">
+              <span class="crafting-wordmark" aria-hidden="true"><small>Stephanie’s</small>Colorful Crafting</span>
+              <span class="art-launch" aria-hidden="true">↗</span>
+            </a>
+            <div class="card-body">
+              <p class="category">PUZZLE <span>·</span> COLOR MIXING</p>
+              <h3>Stephanie’s Colorful Crafting</h3>
+              <p class="description">Mix a little color into your day, one puzzle at a time.</p>
+              <div class="card-actions">
+                <a class="play-button" href="https://steadystategames.dev/Stephanie-s-Colorful-Crafting/" aria-label="Play Stephanie’s Colorful Crafting in your browser"><svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M4 2.5v11L13 8z" fill="currentColor"/></svg> Play now</a>
+                <a class="itch-link" href="https://steadystategames.itch.io/stephanie-colorful-crafting" aria-label="Stephanie’s Colorful Crafting on itch.io">itch.io <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="sr-only" id="search-status" role="status" aria-live="polite"></p>
+        <div class="empty-state" id="empty-state" hidden><p>No games found. Try another search.</p><button type="button" id="reset-search">Show all games</button></div>
+      </section>
+      <aside class="itch-banner" aria-label="Steady State Games on itch.io">
+        <div><span class="banner-icon" aria-hidden="true">↗</span><p>More of an itch.io person?<span>Same games. Another place to play.</span></p></div>
+        <a href="https://steadystategames.itch.io/">Visit our itch.io page <span aria-hidden="true">↗</span></a>
+      </aside>
+    </main>
+    <footer><span>© <span id="year">2026</span> Steady State Games LLC</span><span>Independent games, made with care.</span><a href="https://github.com/SteadyStateGames">Find us on GitHub <span aria-hidden="true">↗</span></a></footer>
   </div>
-
-  <footer>
-    Built with Godot + GitHub Pages.
-  </footer>
-
-  <script>
-    // ------------------------------------------------------------
-    // 1) EDIT THIS LIST to add your games
-    //    url should point to each game's exported index.html
-    // ------------------------------------------------------------
-    const games = [
-      {
-        id: "hold-on",
-        title: "Hold On",
-        desc: "Stay on the raft. Don’t get eaten.",
-        playUrl: "./games/hold-on/index.html",
-        thumb: "./assets/thumbs/hold-on.jpg",
-        tags: ["arcade", "skill", "prototype", "hosted"]
-      },
-      {
-        id: "asteroid-miner",
-        title: "Asteroid Miner",
-        desc: "Capture rocks, manage upgrades, survive.",
-        playUrl: "./games/asteroid-miner/index.html",
-        externalUrl: "https://itch.io/",
-        thumb: "./assets/thumbs/asteroid-miner.jpg",
-        tags: ["strategy", "sci-fi", "godot", "hosted", "itch"]
-      }
-    ];
-
-    // ------------------------------------------------------------
-    // 2) Render grid
-    // ------------------------------------------------------------
-    const grid = document.getElementById("grid");
-    const search = document.getElementById("search");
-    const count = document.getElementById("count");
-
-    const playerTitle = document.getElementById("playerTitle");
-    const playerFrame = document.getElementById("playerFrame");
-    const openNewTab = document.getElementById("openNewTab");
-    const clearGame = document.getElementById("clearGame");
-
-    function render(list) {
-      grid.innerHTML = "";
-      count.textContent = `${list.length} game${list.length === 1 ? "" : "s"}`;
-
-      for (const g of list) {
-        const card = document.createElement("div");
-        const clickable = Boolean(g.playUrl);
-        card.className = `card${clickable ? " is-clickable" : ""}`;
-        if (clickable) {
-          card.tabIndex = 0;
-          card.role = "button";
-          card.ariaLabel = `Play ${g.title}`;
-        }
-
-        card.innerHTML = `
-          <img class="thumb" src="${g.thumb}" alt="${g.title} thumbnail" loading="lazy">
-          <div class="card-body">
-            <h3>${g.title}</h3>
-            <p>${g.desc}</p>
-            <div class="card-actions">
-              ${g.playUrl ? `<button class="btn" data-play="${g.id}">Play here</button>` : ""}
-              ${g.externalUrl ? `<a class="btn" href="${g.externalUrl}" target="_blank" rel="noopener noreferrer">View on itch.io</a>` : ""}
-            </div>
-            <div class="tags">
-              ${(g.tags || []).map(t => `<span class="tag">${t}</span>`).join("")}
-            </div>
-          </div>
-        `;
-
-        if (g.playUrl) {
-          const play = () => loadGame(g);
-          card.addEventListener("click", play);
-          card.addEventListener("keydown", (e) => {
-            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); }
-          });
-        }
-
-        grid.appendChild(card);
-      }
-
-      grid.querySelectorAll("[data-play]").forEach((btn) => {
-        btn.addEventListener("click", (event) => {
-          event.stopPropagation();
-          const targetGame = list.find((game) => game.id === btn.dataset.play);
-          if (targetGame) loadGame(targetGame);
-        });
-      });
-    }
-
-    // ------------------------------------------------------------
-    // 3) Load selected game into iframe
-    // ------------------------------------------------------------
-    function loadGame(g) {
-      playerTitle.textContent = `Now playing: ${g.title}`;
-      playerFrame.src = g.playUrl;
-
-      openNewTab.disabled = false;
-      clearGame.disabled = false;
-
-      openNewTab.onclick = () => window.open(g.playUrl, "_blank", "noopener,noreferrer");
-      clearGame.onclick = () => {
-        playerFrame.src = "";
-        playerTitle.textContent = "Select a game to play";
-        openNewTab.disabled = true;
-        clearGame.disabled = true;
-      };
-
-      // Scroll player into view on mobile
-      document.querySelector(".player").scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-
-    // ------------------------------------------------------------
-    // 4) Search filter
-    // ------------------------------------------------------------
-    function filterGames(q) {
-      q = q.trim().toLowerCase();
-      if (!q) return games;
-
-      return games.filter(g => {
-        const hay = `${g.title} ${(g.tags || []).join(" ")} ${g.desc}`.toLowerCase();
-        return hay.includes(q);
-      });
-    }
-
-    search.addEventListener("input", () => render(filterGames(search.value)));
-
-    render(games);
-  </script>
 </body>
 </html>
