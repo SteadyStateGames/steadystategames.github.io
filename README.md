@@ -16,6 +16,8 @@ Search derives its entries from the cards. The catalog and links work without Ja
 
 Artwork comes from the studio's published game icons and itch.io covers, stored locally
 in `assets/`. Styling lives in `styles.css`; optional search is in `script.js`.
+The studio logo is the supplied `assets/steady-state-games-logo.png`, displayed
+in white with CSS on the dark header. A separate small-games arcade page is planned for later.
 
 ## Hosting
 

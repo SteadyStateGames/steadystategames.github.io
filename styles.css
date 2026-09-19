@@ -9,9 +9,8 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 [hidden]{display:none!important}
 .site-shell{width:min(1240px,100% - 96px);margin:0 auto}
 .site-header{min-height:112px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:24px}
-.brand{display:inline-flex;align-items:center;gap:12px;font-size:14px;font-weight:800;letter-spacing:.06em;line-height:1.18}
-.brand-mark{color:var(--lime);flex-shrink:0}
-.brand-bottom{display:block;letter-spacing:.24em;font-size:12px;margin-top:4px}
+.brand{display:inline-flex;align-items:center;flex-shrink:0;padding:12px 0}
+.brand-logo{display:block;width:152px;height:152px;object-fit:contain;filter:brightness(0) invert(1)}
 nav{display:flex;align-items:center;gap:30px;font-size:13px;font-weight:600}
 nav a{padding:14px 0;color:var(--muted)}
 nav a:hover,nav .nav-current{color:var(--text)}
@@ -19,11 +18,8 @@ nav .nav-current{position:relative}
 nav .nav-current:after{content:"";height:4px;width:4px;border-radius:50%;background:var(--lime);position:absolute;bottom:4px;left:50%}
 nav span{margin-left:5px}
 .intro{display:flex;align-items:center;justify-content:space-between;gap:36px;padding:53px 0 45px}
-.eyebrow{font-size:10px;letter-spacing:.15em;font-weight:700;color:var(--muted);margin:0 0 17px;display:flex;align-items:center;gap:9px}
-.status-dot{height:6px;width:6px;background:var(--lime);border-radius:50%}
 h1{font-size:clamp(56px,7vw,88px);letter-spacing:-.07em;line-height:1.05;margin:0;font-weight:800}
 .accent{color:var(--lime)}
-.intro-copy{font-size:15px;line-height:1.6;color:var(--muted);margin:19px 0 0}
 .intro-decoration{display:grid;grid-template-columns:repeat(2,54px);gap:7px;transform:rotate(-12deg);margin-right:14px}
 .intro-decoration span{display:grid;place-items:center;height:54px;border:1px solid #4a5045;border-radius:13px;color:var(--lime);font-size:32px;font-weight:400}
 .intro-decoration span:nth-child(2){background:var(--lime);border-color:var(--lime);color:var(--bg);font-size:22px}
@@ -90,7 +86,7 @@ footer a:hover{color:var(--lime)}
 .skip-link:focus{top:12px}
 @media(min-width:1450px){.artwork{aspect-ratio:1.45}.barrage-lockup span{font-size:43px}}
 @media(max-width:1050px){.site-shell{width:calc(100% - 56px)}.game-grid{gap:15px}.card-body{padding:20px 17px}.barrage-lockup{gap:9px}.barrage-lockup img{width:65px;height:65px}.barrage-lockup span{font-size:29px}.crafting-wordmark{font-size:20px}.artwork{aspect-ratio:1.2}.art-index{left:16px}h3{font-size:18px}.play-button{padding:13px}.platform{font-size:9px}}
-@media(max-width:760px){.site-shell{width:calc(100% - 40px)}.site-header{min-height:90px}.brand{font-size:11px;gap:9px}.brand-bottom{font-size:10px}.brand-mark{width:34px;height:34px}nav{gap:18px;font-size:12px}nav .nav-current{display:none}.intro{padding:36px 0 32px;gap:15px}.intro-decoration{grid-template-columns:repeat(2,37px);gap:5px;margin-right:5px}.intro-decoration span{height:37px;font-size:25px;border-radius:9px}.intro-decoration span:nth-child(2){font-size:16px}.intro-decoration span:nth-child(3){font-size:25px}.intro-decoration span:nth-child(4){font-size:18px}.eyebrow{font-size:8px;letter-spacing:.08em;max-width:240px;line-height:1.5}h1{font-size:64px}.intro-copy{font-size:13px;max-width:32ch;margin-top:14px}.game-grid{grid-template-columns:1fr;gap:22px}.artwork{aspect-ratio:1.65}.barrage-lockup img{width:95px;height:95px}.barrage-lockup span{font-size:48px}.barrage-lockup{gap:18px}.solitaire-icon{width:120px;height:120px}.solitaire-wordmark{font-size:34px}.crafting-icon{width:112px;height:112px}.crafting-wordmark{font-size:25px}.card-body{padding:22px}h3{font-size:22px;min-height:0}.description{min-height:0;max-width:none;margin-bottom:20px;font-size:14px}.category{font-size:10px}.play-button{padding:13px 20px;font-size:13px}.itch-link{font-size:13px}.platform{font-size:11px}.search{width:160px}h2{font-size:16px;gap:8px}.itch-banner{padding:20px;align-items:flex-start;flex-direction:column;gap:13px;margin-bottom:30px}.itch-banner>a{margin-left:57px}footer{flex-wrap:wrap;gap:12px;font-size:10px}footer>span:nth-child(2){display:none}}
+@media(max-width:760px){.site-shell{width:calc(100% - 40px)}.site-header{min-height:90px}.brand-logo{width:120px;height:120px}nav{gap:18px;font-size:12px}nav .nav-current{display:none}.intro{padding:36px 0 32px;gap:15px}.intro-decoration{grid-template-columns:repeat(2,37px);gap:5px;margin-right:5px}.intro-decoration span{height:37px;font-size:25px;border-radius:9px}.intro-decoration span:nth-child(2){font-size:16px}.intro-decoration span:nth-child(3){font-size:25px}.intro-decoration span:nth-child(4){font-size:18px}h1{font-size:64px}.game-grid{grid-template-columns:1fr;gap:22px}.artwork{aspect-ratio:1.65}.barrage-lockup img{width:95px;height:95px}.barrage-lockup span{font-size:48px}.barrage-lockup{gap:18px}.solitaire-icon{width:120px;height:120px}.solitaire-wordmark{font-size:34px}.crafting-icon{width:112px;height:112px}.crafting-wordmark{font-size:25px}.card-body{padding:22px}h3{font-size:22px;min-height:0}.description{min-height:0;max-width:none;margin-bottom:20px;font-size:14px}.category{font-size:10px}.play-button{padding:13px 20px;font-size:13px}.itch-link{font-size:13px}.platform{font-size:11px}.search{width:160px}h2{font-size:16px;gap:8px}.itch-banner{padding:20px;align-items:flex-start;flex-direction:column;gap:13px;margin-bottom:30px}.itch-banner>a{margin-left:57px}footer{flex-wrap:wrap;gap:12px;font-size:10px}}
 @media(max-width:600px){.intro-decoration{display:none}}
 @media(max-width:380px){.site-shell{width:calc(100% - 28px)}nav{gap:12px}.collection-bar{gap:10px}.search{width:140px}.artwork{aspect-ratio:1.4}.barrage-lockup span{font-size:42px}.barrage-lockup img{width:78px;height:78px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
