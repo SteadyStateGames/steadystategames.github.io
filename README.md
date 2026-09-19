@@ -34,7 +34,7 @@ Verified catalog (September 19, 2026):
 
 | Game | Browser | itch.io |
 | --- | --- | --- |
-| Barrage Blockade | https://steadystategames.dev/Barrage-Blockade/ | Not listed on the public profile |
+| Barrage Blockade | https://steadystategames.dev/Barrage-Blockade/ | https://steadystategames.itch.io/barrage-blockade |
 | Solitaire | https://steadystategames.dev/SolitaireForMyBeautifulWife/ | https://steadystategames.itch.io/soliatire |
 | Stephanie's Colorful Crafting | https://steadystategames.dev/Stephanie-s-Colorful-Crafting/ | https://steadystategames.itch.io/stephanie-colorful-crafting |
 
