@@ -23,6 +23,13 @@ Keep `CNAME` set to `steadystategames.dev`. The individual games deploy through 
 own repositories; the homepage links to those existing URLs without duplicating builds.
 There is no root service worker to interfere with the games' own caches.
 
+## Contributions
+
+The support button links to https://buy.stripe.com/8x200l9n9fRK0XXdv76g800.
+Stripe hosts checkout; supporters choose a one-time amount in USD. No payment
+credentials or card details are stored on this website. Manage the link in Stripe
+under Checkout → Payment links → Support Steady State Games.
+
 Verified catalog (September 19, 2026):
 
 | Game | Browser | itch.io |
