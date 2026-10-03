@@ -1,6 +1,20 @@
 # Steady State Games
 
-The static game library at https://steadystategames.dev/, hosted on GitHub Pages.
+The static game library and teaching portfolio at https://steadystategames.dev/, hosted on GitHub Pages.
+
+## Teaching portfolio
+
+`teaching/index.html` is Shawn Crook-Cocagne's teaching portfolio, with styles in
+`teaching/portfolio.css`. It includes assessment creation, chemical-cabinet systems
+and a reference to Blooket creation. New personal-account Blooket examples will be
+linked later; the former work-account collection is inaccessible.
+
+`teaching/documents/` contains the current résumé PDF and Word download, and a
+redacted public Praxis report. The original score report, with candidate ID,
+Social Security digits and date of birth, must not be committed. Update both
+résumé formats together when the local source changes. `/teaching/resume/` sends
+earlier links to the documents section. See `PORTFOLIO_PLAN.md` for the visual
+direction, evidence checklist and phased plan for the wider portfolio.
 
 ## Preview locally
 
