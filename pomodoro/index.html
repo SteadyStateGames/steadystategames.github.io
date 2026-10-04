@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#697c60">
-  <meta name="description" content="Still: a scenic Pomodoro timer with custom timers and a saved checklist.">
-  <title>Still · Pomodoro Timer</title>
-  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <meta name="description" content="Pomodoro: a scenic Pomodoro timer with custom timers and a saved checklist.">
+  <title>Pomodoro · Pomodoro Timer</title>
+  <link rel="icon" href="icon.png" type="image/png">
   <style>
     html,body { width:100%; height:100%; margin:0; overflow:hidden; background:#eef0e5; color:#293a35; font-family:system-ui,sans-serif; }
     #canvas { display:block; width:100%; height:100%; outline:0; touch-action:none; }
@@ -21,16 +21,16 @@
 
 </head>
 <body>
-  <canvas id="canvas" tabindex="0" aria-label="Still Pomodoro timer"></canvas>
+  <canvas id="canvas" tabindex="0" aria-label="Pomodoro Pomodoro timer"></canvas>
   <div id="loading" role="status">
-    <img src="icon.svg" alt="">
-    <p id="status">Loading Still…</p>
+    <img src="icon.png" alt="">
+    <p id="status">Loading Pomodoro…</p>
     <progress id="progress" max="1"></progress>
   </div>
   <script src="browser.js"></script>
   <script src="index.js"></script>
   <script>
-    const engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":7390340,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
+    const engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":8748888,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
     window.stillEngine = engine;
     engine.startGame({
       canvas: document.getElementById('canvas'),
@@ -43,7 +43,7 @@
     }).catch(error => {
       console.error(error);
       document.getElementById('progress').hidden = true;
-      document.getElementById('status').textContent = 'Could not start Still. Try reloading in a browser with WebGL 2 support.';
+      document.getElementById('status').textContent = 'Could not start Pomodoro. Try reloading in a browser with WebGL 2 support.';
     });
   </script>
 </body>

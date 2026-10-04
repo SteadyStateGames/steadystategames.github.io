@@ -58,4 +58,4 @@ The `10kFonts` repository is a font collection, so it is not included in the gam
 
 ## Pomodoro timer
 
-[Still](https://steadystategames.dev/pomodoro/) is a scenic Pomodoro timer with movable and resizable controls, custom countdowns, and a saved checklist. Its standalone Godot Web export is in `pomodoro/`. Preferences and tasks save locally in each visitor's browser; there is no account or shared task database. Updates replace only the contents of that directory.
+[Pomodoro](https://steadystategames.dev/pomodoro/) is a scenic Pomodoro timer with movable and resizable controls, custom countdowns, and a saved checklist. Its standalone Godot Web export is in `pomodoro/`. Preferences and tasks save locally in each visitor's browser; there is no account or shared task database. Updates replace only the contents of that directory.
