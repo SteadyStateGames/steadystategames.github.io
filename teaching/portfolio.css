@@ -26,6 +26,10 @@ p{margin:0 0 12px;max-width:72ch}
 .profile-section{padding:30px 0;border-bottom:1px solid var(--line)}
 .profile-section>h2{margin-bottom:18px}
 .credential-report{margin-top:26px}
+.praxis-ribbon{width:336px;max-width:100%;aspect-ratio:336/72;overflow:hidden;margin:12px 0}
+.praxis-ribbon img{display:block;width:100%;height:auto}
+.praxis-scores{display:flex;flex-wrap:wrap;gap:4px 20px;font-size:14px}
+.praxis-scores span{white-space:nowrap}
 .skill+.skill{margin-top:26px}
 .profile-section p:last-child{margin-bottom:0}
 .license{display:grid;grid-template-columns:1fr 1.6fr;gap:12px 24px;margin:20px 0 0;font-size:14px}
