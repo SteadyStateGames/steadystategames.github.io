@@ -7,6 +7,38 @@
   let pending;
   let alarmKey = '';
   const scheduled = new Set();
+  let fullscreenError = '';
+
+  function isFullscreen() {
+    return Boolean(document.fullscreenElement || document.webkitFullscreenElement);
+  }
+
+  function toggleFullscreen() {
+    fullscreenError = '';
+    const entering = !isFullscreen();
+    const target = entering ? document.documentElement : document;
+    const action = entering
+      ? target.requestFullscreen || target.webkitRequestFullscreen
+      : target.exitFullscreen || target.webkitExitFullscreen;
+    if (!action) return false;
+    try {
+      // Invoke inside the button's user gesture; a deferred request can be denied.
+      const result = action.call(target);
+      if (result?.catch) result.catch(() => { fullscreenError = 'Could not change fullscreen. Use your browser’s fullscreen option.'; });
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // Keep Escape working even if the canvas loses keyboard focus in fullscreen.
+  window.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && isFullscreen()) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      toggleFullscreen();
+    }
+  }, { capture: true });
 
   function audio() {
     if (!context) {
@@ -79,5 +111,12 @@
     schedule,
     preview(volume) { play(volume); },
     alarmWasScheduled(deadline) { return scheduled.has(deadline); },
+    isFullscreen,
+    toggleFullscreen,
+    takeFullscreenError() {
+      const error = fullscreenError;
+      fullscreenError = '';
+      return error;
+    },
   };
 })();
