@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#697c60">
   <meta name="description" content="Pomodoro: a scenic Pomodoro timer with custom timers and a saved checklist.">
   <title>Pomodoro · Pomodoro Timer</title>
-  <link rel="icon" href="icon.png" type="image/png">
+  <link rel="icon" href="icon.png?v=mountain-stopwatch" type="image/png">
   <style>
     html,body { width:100%; height:100%; margin:0; overflow:hidden; background:#eef0e5; color:#293a35; font-family:system-ui,sans-serif; }
     #canvas { display:block; width:100%; height:100%; outline:0; touch-action:none; }
@@ -23,14 +23,14 @@
 <body>
   <canvas id="canvas" tabindex="0" aria-label="Pomodoro Pomodoro timer"></canvas>
   <div id="loading" role="status">
-    <img src="icon.png" alt="">
+    <img src="icon.png?v=mountain-stopwatch" alt="">
     <p id="status">Loading Pomodoro…</p>
     <progress id="progress" max="1"></progress>
   </div>
   <script src="browser.js"></script>
   <script src="index.js"></script>
   <script>
-    const engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":8748888,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
+    const engine = new Engine({"args":[],"canvasResizePolicy":2,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":9200856,"index.wasm":39514754},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4});
     window.stillEngine = engine;
     engine.startGame({
       canvas: document.getElementById('canvas'),
