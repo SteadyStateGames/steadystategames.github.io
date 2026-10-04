@@ -5,9 +5,10 @@ The static game library and teaching portfolio at https://steadystategames.dev/,
 ## Teaching portfolio
 
 `teaching/index.html` is Shawn Crook-Cocagne's teaching portfolio, with styles in
-`teaching/portfolio.css`. The concise page focuses on five points: CU ASPIRE and
-Colorado alternative licensure, the Praxis report, Google Drive and Apps Script,
-OpenStax and PhET, and assessment automation. Its official logo links home; the
+`teaching/portfolio.css`. The page groups license details and the Praxis report
+under License and credentials, and classroom experience under Unique skills:
+Google Drive and Apps Script, OpenStax and PhET, assessment, Canvas and other
+learning management systems, and assessment automation. Its official logo links home; the
 teaching navigation links to résumé downloads, credentials and email contact.
 
 `teaching/documents/` contains the current résumé PDF and Word download, and a

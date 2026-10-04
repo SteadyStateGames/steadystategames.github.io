@@ -4,13 +4,14 @@ Updated October 4, 2026.
 
 Keep `/teaching/` concise and professional. Use the official logo as the link home. Teaching navigation contains Résumé, Credentials and Contact; résumé navigation goes directly to the PDF and editable Word downloads. Keep the games out of this page's navigation and content.
 
-The page focuses on five points:
+The page groups the content under two headings, License and credentials and Unique skills. The supporting points are:
 
 1. CU ASPIRE participation and Colorado Alternative Teaching License 24556952, Science Education (Grades 6-12), issued July 20, 2026 and expiring July 20, 2028.
 2. Praxis General Science (5436), score 193, with a downloadable public score report. Keep candidate ID, Social Security digits and date of birth out of the published PDF.
 3. Google Drive and Apps Script automation, including the QR-code log linked to a restricted Google Form that updated the storeroom datasheet.
 4. OpenStax and PhET resources used in teaching.
 5. Tools developed over six months of teaching to automate Blooket and Kahoot question sets, including typed-answer questions, plus Google Forms assessment creation.
+6. Formative and summative assessment, learning-objective alignment, and daily lesson planning in Canvas and other learning management systems so absent students can find missed work.
 
 ## Next evidence
 
