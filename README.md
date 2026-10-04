@@ -5,16 +5,17 @@ The static game library and teaching portfolio at https://steadystategames.dev/,
 ## Teaching portfolio
 
 `teaching/index.html` is Shawn Crook-Cocagne's teaching portfolio, with styles in
-`teaching/portfolio.css`. It includes assessment creation, chemical-cabinet systems
-and a reference to Blooket creation. New personal-account Blooket examples will be
-linked later; the former work-account collection is inaccessible.
+`teaching/portfolio.css`. The concise page focuses on five points: CU ASPIRE and
+Colorado alternative licensure, the Praxis report, Google Drive and Apps Script,
+OpenStax and PhET, and assessment automation. Its official logo links home; the
+teaching navigation links to résumé downloads, credentials and email contact.
 
 `teaching/documents/` contains the current résumé PDF and Word download, and a
 redacted public Praxis report. The original score report, with candidate ID,
 Social Security digits and date of birth, must not be committed. Update both
 résumé formats together when the local source changes. `/teaching/resume/` sends
-earlier links to the documents section. See `PORTFOLIO_PLAN.md` for the visual
-direction, evidence checklist and phased plan for the wider portfolio.
+earlier links to the résumé downloads. The previous `#documents` anchor also works.
+See `PORTFOLIO_PLAN.md` for the current scope and next evidence to add.
 
 ## Preview locally
 
