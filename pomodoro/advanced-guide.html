@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pomodoro advanced guide</title>
+<style>
+body{font:16px/1.65 system-ui,sans-serif;color:#293a35;background:#f6f7f0;margin:0}main{max-width:780px;margin:auto;padding:36px 24px 70px}a{color:#436149}h1,h2{line-height:1.25}h2{margin-top:40px}pre{background:#e8ecdf;padding:20px;border-radius:12px;overflow:auto;font-size:14px;line-height:1.5}code{font-family:ui-monospace,Consolas,monospace}li{margin:8px 0}p{margin:16px 0}
+</style>
+</head>
+<body><main>
+<a href="./">Back to Pomodoro</a>
+<h1>Advanced guide</h1>
+<p>Everyday instructions are in Help inside the app. These optional settings are for people who want more control.</p>
+<h2>Arrange your page</h2>
+<p>Adjust opens Settings / View. Turn the timer, checklist, music controls, logo, top menu, or background on or off. Your choices save automatically. The small top-right arrow stays available to bring the menu back. Choose Show everything to restore the page.</p>
+<p>Hiding a timer or music controls does not stop them. Pause first if you want to stop counting or playing. Minimizing keeps a smaller panel; hiding removes the panel entirely. Drag panels to move them and their bottom-right corners to resize. Settings / Timer can reset their positions and sizes.</p>
+<h2>Work stopwatch</h2>
+<p>Work stopwatch counts up green work time and red distraction time separately. Switch with Work / Distraction or the switch button. Pause for breaks. Reset clears both totals. Changing presets preserves the work log. A running stopwatch continues counting until paused, including time after closing the app.</p>
+<h2>Your music</h2>
+<p>Open the music button or Settings / Music. Choose a built-in mood, or add MP3 / OGG files and name your personal library. Library playlists advance automatically and support shuffle. Scene music loops the song paired with your background.</p>
+<p>Browser imports save locally on that device; they are not uploaded or synchronized. Clearing site data removes imports. Chrome and Edge can connect to a folder and retain read-only file handles; use Reconnect / refresh if permission expires or you add files. Other browsers import selected folder files. The desktop app remembers file locations and scans its connected folder on startup or refresh. Removing an entry leaves the original file intact.</p>
+<h2>Automatic distraction tracking</h2>
+<p>The optional Chrome / Edge helper watches the foreground tab in its browser. YouTube and TikTok count as distraction by default. Other tabs and applications count as work. It cannot detect phone use, another browser, or desktop video apps. Keep Pomodoro open, select Work stopwatch, and pause for breaks.</p>
+<ol>
+<li><a href="pomodoro-tracking-helper.zip">Download the helper</a> and unzip it to a folder you will keep.</li>
+<li>Open <code>chrome://extensions</code> or <code>edge://extensions</code>. Turn on Developer mode.</li>
+<li>Choose Load unpacked and select that folder.</li>
+<li>Reload Pomodoro and enable automatic tracking in Settings / Tracking.</li>
+</ol>
+<p>To update an earlier helper, replace its files with the new download, keep a copy of any personal config, click Reload on its Extensions entry, and reload Pomodoro. Version 1.1 adds the browser tabs permission so custom sites can be classified.</p>
+<h2>Customize tracked sites and exceptions</h2>
+<p>Edit <code>tracker-config.json</code> inside your unzipped helper folder using a text editor. Save it, click Reload on the helper's Extensions entry, and reload Pomodoro. You do not need to edit the app or the website.</p>
+<p>Example: add Facebook, allow one work video, and allow a YouTube series played from its playlist:</p>
+<pre><code>{
+  "tracked_sites": [
+    "youtube.com", "youtu.be", "tiktok.com", "facebook.com"
+  ],
+  "allow": {
+    "youtube_video_ids": ["YOUR_VIDEO_ID"],
+    "youtube_playlist_ids": ["YOUR_PLAYLIST_ID"],
+    "rules": [
+      {
+        "site": "facebook.com",
+        "path_prefix": "/groups/YOUR_WORK_GROUP/"
+      }
+    ]
+  }
+}</code></pre>
+<ul>
+<li><code>tracked_sites</code> takes hostnames without <code>https://</code> or paths. A hostname includes its subdomains; <code>facebook.com</code> also matches <code>www.facebook.com</code>. Remove an entry to stop tracking that site. An empty array disables site matching.</li>
+<li><code>youtube_video_ids</code> allows the ID after <code>v=</code> in a watch link, or after <code>youtu.be/</code>. The exception also applies to Shorts, live and embedded links for that ID, regardless of extra URL parameters.</li>
+<li><code>youtube_playlist_ids</code> allows the value after <code>list=</code>. Open a series through its playlist so the playing URL retains <code>list=</code>. A standalone link without that playlist parameter will still count as distraction unless its video ID is also allowed. The helper does not fetch playlist membership or channel information.</li>
+<li>Allow rules are checked before distraction is counted. Every condition within one rule must match. Matching any allow rule counts that page as work. These rules do not pause the stopwatch.</li>
+<li>Use valid JSON: double quotes, commas between entries, no comments or trailing commas. A missing or invalid config falls back to the default YouTube / TikTok rules. The helper's service-worker console shows the config error.</li>
+</ul>
+<p>Rules can use an exact <code>path</code>, a <code>path_prefix</code>, and exact <code>query</code> values. Paths and query values are case-sensitive. A rule containing only <code>site</code> allows that entire site.</p>
+<pre><code>{
+  "site": "youtube.com",
+  "path": "/watch",
+  "query": { "v": "YOUR_VIDEO_ID" }
+}</code></pre>
+<h2>Privacy and limits</h2>
+<p>The helper uses the tabs permission to read the foreground tab's URL for local matching. It does not store URLs, titles or page contents, send browsing data to a server, or block websites. Only work/distraction transitions are kept in browser-session storage, up to 2,000 transitions. Incognito tabs are excluded. Delayed transitions are reconciled when the Pomodoro canvas resumes. Disable automatic tracking in Settings, or disable/remove the helper on the browser's Extensions page.</p>
+<h2>Saving, audio and shortcuts</h2>
+<p>Tasks, settings, layouts and timer state belong to that browser/device. They do not sync across devices or with the Windows edition. A running countdown restores its deadline when reopened. Keep the page open for chimes; the browser may suspend audio while the device sleeps. Music waits for Play each time the app opens.</p>
+<p>Space starts or pauses the timer. F11 toggles fullscreen. Escape closes a menu or exits fullscreen. When typing in a text field, normal text entry takes priority.</p>
+</main></body></html>
