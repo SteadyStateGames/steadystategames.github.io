@@ -9,6 +9,7 @@
   let musicPath = '';
   let musicWanted = false;
   let musicError = '';
+  let musicRequest = 0;
   let pending;
   let alarmKey = '';
   const scheduled = new Set();
@@ -90,7 +91,7 @@
   }
 
   function schedule(state) {
-    const nextKey = state.running && state.sound && state.volume > 0
+    const nextKey = state.running && !state.stopwatch && state.sound && state.volume > 0
       ? `${state.deadline}:${state.volume}:${state.chime_variant || 0}` : '';
     if (nextKey === alarmKey) return;
     if (pending && pending.deadline > Date.now() / 1000) {
@@ -109,7 +110,7 @@
     }
   }
 
-  function syncMusic(state) {
+  async function syncMusic(state) {
     musicWanted = Boolean(state.playing);
     if (!music) {
       music = new Audio();
@@ -117,11 +118,26 @@
       music.preload = 'none';
       music.addEventListener('error', () => { musicError = 'Could not load this song. Try another background.'; });
     }
+    music.loop = state.loop !== false;
     if (musicPath !== state.path) {
       music.pause();
       musicPath = state.path;
-      music.src = new URL(musicPath, document.baseURI).href;
+      music.removeAttribute('src');
       musicError = '';
+      ++musicRequest;
+    }
+    if (!music.hasAttribute('src') && musicWanted) {
+      const request = ++musicRequest;
+      try {
+        const source = musicPath.startsWith('custom:')
+          ? await window.StillLibrary.resolveTrack(musicPath.slice(7))
+          : new URL(musicPath, document.baseURI).href;
+        if (request !== musicRequest || !musicWanted) return;
+        music.src = source;
+      } catch (error) {
+        if (request === musicRequest) musicError = error.message;
+        return;
+      }
     }
     if (musicGain) musicGain.gain.value = state.muted ? 0 : Math.max(0, Math.min(1, state.volume));
     if (!musicWanted) { music.pause(); return; }
@@ -133,6 +149,7 @@
     }
     musicGain.gain.value = state.muted ? 0 : Math.max(0, Math.min(1, state.volume));
     if (music.paused) {
+      if (music.ended) music.currentTime = 0;
       const requestedPath = musicPath;
       music.play().catch(error => {
         if (requestedPath !== musicPath || !musicWanted || error.name === 'AbortError') return;
@@ -162,9 +179,11 @@
     syncMusic,
     musicStatus() {
       return JSON.stringify({ playing: Boolean(music && !music.paused), path: musicPath,
-        volume: musicGain?.gain.value || 0, currentTime: music?.currentTime || 0, loop: music?.loop || false });
+        volume: musicGain?.gain.value || 0, currentTime: music?.currentTime || 0, loop: music?.loop || false,
+        ended: music?.ended || false });
     },
     takeMusicError() { const error = musicError; musicError = ''; return error; },
+    isMusicEnded() { return Number(Boolean(musicWanted && music?.hasAttribute('src') && !music.loop && music.ended)); },
     alarmWasScheduled(deadline) { return scheduled.has(deadline); },
     isFullscreen,
     toggleFullscreen,
