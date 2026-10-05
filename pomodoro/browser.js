@@ -10,6 +10,9 @@
   let musicWanted = false;
   let musicError = '';
   let musicRequest = 0;
+  let musicState;
+  let automaticTrack = '';
+  let advancing = false;
   let pending;
   let alarmKey = '';
   const scheduled = new Set();
@@ -110,13 +113,16 @@
     }
   }
 
-  async function syncMusic(state) {
+  async function syncMusic(state, automatic = false) {
+    if (!automatic && (state.explicit || state.track === automaticTrack)) automaticTrack = '';
+    musicState = state;
     musicWanted = Boolean(state.playing);
     if (!music) {
       music = new Audio();
       music.loop = true;
       music.preload = 'none';
-      music.addEventListener('error', () => { musicError = 'Could not load this song. Try another background.'; });
+      music.addEventListener('error', () => { musicError = 'Could not load this song. Choose another track.'; });
+      music.addEventListener('ended', advanceMusic);
     }
     music.loop = state.loop !== false;
     if (musicPath !== state.path) {
@@ -153,10 +159,33 @@
       const requestedPath = musicPath;
       music.play().catch(error => {
         if (requestedPath !== musicPath || !musicWanted || error.name === 'AbortError') return;
-        musicError = error.name === 'NotAllowedError' ? 'Press Play to start the music.' : 'Could not play this song. Try another background.';
+        musicError = error.name === 'NotAllowedError' ? 'Press Play to start the music.' : 'Could not play this song. Choose another track.';
       });
     }
   }
+
+  async function advanceMusic() {
+    if (advancing || !musicWanted || !music?.hasAttribute('src') || music.loop || !music.ended) return;
+    const playlist = musicState?.playlist || [];
+    if (!playlist.length) return;
+    const current = playlist.findIndex(track => track.id === musicState.track);
+    const choices = playlist.filter(track => track.id !== musicState.track);
+    const next = musicState.shuffle && choices.length
+      ? choices[Math.floor(Math.random() * choices.length)] : playlist[(current + 1) % playlist.length];
+    advancing = true;
+    automaticTrack = next.id;
+    try {
+      // Audio and the next track stay independent of Godot's background frame rate.
+      await syncMusic({ ...musicState, path: next.path, track: next.id, explicit: false }, true);
+      const saved = JSON.parse(localStorage.getItem(key) || 'null');
+      if (saved && automaticTrack === next.id) {
+        saved.music_track = next.id;
+        localStorage.setItem(key, JSON.stringify(saved));
+      }
+    } catch { /* The canvas reports audio errors and handles unavailable storage. */ }
+    finally { advancing = false; }
+  }
+  setInterval(advanceMusic, 500);
 
   // Resume audio after the first user gesture, including a restored active timer.
   for (const type of ['pointerdown', 'keydown']) {
@@ -177,6 +206,7 @@
     schedule,
     preview(volume, variant = 0) { play(volume, 0, variant); },
     syncMusic,
+    musicSelection() { return JSON.stringify({ source: musicState?.source, track: musicState?.track, automatic: Boolean(automaticTrack) }); },
     musicStatus() {
       return JSON.stringify({ playing: Boolean(music && !music.paused), path: musicPath,
         volume: musicGain?.gain.value || 0, currentTime: music?.currentTime || 0, loop: music?.loop || false,
