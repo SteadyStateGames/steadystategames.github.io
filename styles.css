@@ -40,7 +40,7 @@ nav span{margin-left:5px}
 .solitaire-art{background:#164635;color:#d8ebcd;flex-direction:column;background-image:radial-gradient(ellipse at 45% 25%,#ffffff09,transparent 70%)}
 .solitaire-art:before,.solitaire-art:after{content:"♠";position:absolute;font-family:Georgia,serif;font-size:120px;color:#e3eed305;transform:rotate(18deg);left:7px;bottom:-21px}
 .solitaire-art:after{content:"♣";left:auto;right:-10px;top:10px}
-.solitaire-icon{width:126px;height:126px;object-fit:contain;border-radius:12px;transform:rotate(9deg);margin-top:8px;box-shadow:0 12px 22px #071e2a22}
+.solitaire-icon{width:126px;height:126px;object-fit:contain;border-radius:12px;margin-top:8px;box-shadow:0 12px 22px #071e2a22}
 .solitaire-wordmark{font-family:Georgia,'Times New Roman',serif;font-size:36px;font-style:italic;letter-spacing:-.04em;margin-top:9px}
 .crafting-art{background:#c6b9e6;color:#392d51;flex-direction:column}
 .crafting-art:before{content:"";position:absolute;width:190px;height:190px;border:1px solid #ffffff55;border-radius:50%;left:-80px;top:60px;z-index:-1}
