@@ -37,11 +37,8 @@ nav span{margin-left:5px}
 .barrage-lockup{display:flex;align-items:center;gap:13px;transform:rotate(-5deg);padding-bottom:10px}
 .barrage-lockup img{width:81px;height:81px;object-fit:contain;border-radius:18px;box-shadow:5px 6px 0 #24282126}
 .barrage-lockup span{font-family:Impact,'Arial Narrow',sans-serif;font-size:clamp(27px,3.1vw,42px);line-height:.98;letter-spacing:-.025em}
-.solitaire-art{background:#164635;color:#d8ebcd;flex-direction:column;background-image:radial-gradient(ellipse at 45% 25%,#ffffff09,transparent 70%)}
-.solitaire-art:before,.solitaire-art:after{content:"♠";position:absolute;font-family:Georgia,serif;font-size:120px;color:#e3eed305;transform:rotate(18deg);left:7px;bottom:-21px}
-.solitaire-art:after{content:"♣";left:auto;right:-10px;top:10px}
-.solitaire-icon{width:126px;height:126px;object-fit:contain;border-radius:12px;margin-top:8px;box-shadow:0 12px 22px #071e2a22}
-.solitaire-wordmark{font-family:Georgia,'Times New Roman',serif;font-size:36px;font-style:italic;letter-spacing:-.04em;margin-top:9px}
+.solitaire-art{background:#164635;color:#d8ebcd;flex:none}
+.solitaire-cover{display:block;width:100%;height:100%;object-fit:contain}
 .crafting-art{background:#c6b9e6;color:#392d51;flex-direction:column}
 .crafting-art:before{content:"";position:absolute;width:190px;height:190px;border:1px solid #ffffff55;border-radius:50%;left:-80px;top:60px;z-index:-1}
 .crafting-art:after{content:"";position:absolute;width:170px;height:170px;border:1px solid #ffffff55;border-radius:50%;right:-80px;top:-20px;z-index:-1}
@@ -79,6 +76,7 @@ footer a:hover{color:var(--lime)}
 .skip-link:focus{top:12px}
 @media(min-width:1450px){.artwork{aspect-ratio:1.45}.barrage-lockup span{font-size:43px}}
 @media(max-width:1050px){.site-shell{width:calc(100% - 56px)}.game-grid{gap:15px}.card-body{padding:20px 17px}.barrage-lockup{gap:9px}.barrage-lockup img{width:65px;height:65px}.barrage-lockup span{font-size:29px}.crafting-wordmark{font-size:20px}.artwork{aspect-ratio:1.2}.art-index{left:16px}.game-card h2{font-size:18px}.play-button{padding:13px}.platform{font-size:9px}}
-@media(max-width:760px){.site-shell{width:calc(100% - 40px)}.site-header{min-height:90px}.brand-logo{width:120px;height:120px}nav{gap:18px;font-size:12px}nav .nav-current{display:none}.game-grid{grid-template-columns:1fr;gap:22px}.artwork{aspect-ratio:1.65}.barrage-lockup img{width:95px;height:95px}.barrage-lockup span{font-size:48px}.barrage-lockup{gap:18px}.solitaire-icon{width:120px;height:120px}.solitaire-wordmark{font-size:34px}.crafting-icon{width:112px;height:112px}.crafting-wordmark{font-size:25px}.card-body{padding:22px}.game-card h2{font-size:22px;min-height:0}.description{min-height:0;max-width:none;margin-bottom:20px;font-size:14px}.category{font-size:10px}.play-button{padding:13px 20px;font-size:13px}.itch-link{font-size:13px}.platform{font-size:11px}.search{width:160px}.collection-bar h1{font-size:16px;gap:8px}.itch-banner{padding:20px;align-items:flex-start;flex-direction:column;gap:13px;margin-bottom:30px}.itch-banner>a{margin-left:57px}footer{flex-wrap:wrap;gap:12px;font-size:10px}}
+@media(max-width:760px){.site-shell{width:calc(100% - 40px)}.site-header{min-height:90px}.brand-logo{width:120px;height:120px}nav{gap:18px;font-size:12px}nav .nav-current{display:none}.game-grid{grid-template-columns:1fr;gap:22px}.artwork{aspect-ratio:1.65}.barrage-lockup img{width:95px;height:95px}.barrage-lockup span{font-size:48px}.barrage-lockup{gap:18px}.crafting-icon{width:112px;height:112px}.crafting-wordmark{font-size:25px}.card-body{padding:22px}.game-card h2{font-size:22px;min-height:0}.description{min-height:0;max-width:none;margin-bottom:20px;font-size:14px}.category{font-size:10px}.play-button{padding:13px 20px;font-size:13px}.itch-link{font-size:13px}.platform{font-size:11px}.search{width:160px}.collection-bar h1{font-size:16px;gap:8px}.itch-banner{padding:20px;align-items:flex-start;flex-direction:column;gap:13px;margin-bottom:30px}.itch-banner>a{margin-left:57px}footer{flex-wrap:wrap;gap:12px;font-size:10px}}
 @media(max-width:380px){.site-shell{width:calc(100% - 28px)}nav{gap:12px}.collection-bar{gap:10px}.search{width:140px}.artwork{aspect-ratio:1.4}.barrage-lockup span{font-size:42px}.barrage-lockup img{width:78px;height:78px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+.artwork.solitaire-art{aspect-ratio:2}
