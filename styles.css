@@ -83,3 +83,12 @@ footer a:hover{color:var(--lime)}
 
 .purrsonal-art{background:#f8f3ed;color:#65534d}
 .purrsonal-icon{width:57%;height:auto;border-radius:22%;box-shadow:0 10px 24px #65534d25}
+
+/* Keep support beside the home logo without competing with the games. */
+.donation-header{flex-wrap:wrap;row-gap:0}
+.brand-support{display:flex;align-items:center;gap:20px;max-width:100%}
+.header-donation{display:inline-flex;align-items:center;min-height:44px;padding:8px 0;color:var(--lime);font-size:13px;line-height:1.4;text-decoration:underline;text-underline-offset:4px}
+.header-donation:hover{color:var(--text)}
+.donation-header nav{margin-left:auto}
+@media(max-width:900px){.donation-header nav{flex-basis:100%;justify-content:flex-end;padding-bottom:12px}}
+@media(max-width:760px){.brand-support{gap:12px}.donation-header nav{justify-content:space-between}.header-donation{font-size:12px}}

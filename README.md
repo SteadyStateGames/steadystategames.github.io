@@ -43,7 +43,7 @@ There is no root service worker to interfere with the games' own caches.
 
 ## Contributions
 
-The support button links to https://buy.stripe.com/8x200l9n9fRK0XXdv76g800.
+The compact “Keep SteadyState alive!” link beside the home logo links to https://buy.stripe.com/8x200l9n9fRK0XXdv76g800.
 Stripe hosts checkout; supporters choose a one-time amount in USD. No payment
 credentials or card details are stored on this website. Manage the link in Stripe
 under Checkout → Payment links → Support Steady State Games.
