@@ -41,6 +41,32 @@ Keep `CNAME` set to `steadystategames.dev`. The individual games deploy through 
 own repositories; the homepage links to those existing URLs without duplicating builds.
 There is no root service worker to interfere with the games' own caches.
 
+### Land Development
+
+`/land-development/` launches the project's own Godot Web export from
+`land-development/game/`. Runtime files and game assets are served by this
+website, independently of itch.io. The launch button requests browser fullscreen
+where supported; the game fills the available viewport otherwise.
+
+The unchanged resource pack is divided into four files below GitHub's per-file
+limit. `website-pack-loader.js` assembles them and uses Godot's public
+`init`, `preloadFile`, and `start` APIs. Download progress and bounded retries
+are included; the engine and game logic are unchanged. `website-build.json`
+records the source pack SHA-256 and part sizes.
+
+To update, run these from the Land Development project:
+
+```text
+python tools/build_web.py --server https://land-development-signal.steadystategames.workers.dev
+python tools/package_website.py --output <website-checkout>/land-development/game
+```
+
+Commit the resulting game directory to this repository. The packager verifies
+the reconstructed pack before publication and removes obsolete generated parts.
+Multiplayer uses the existing public signaling service and WebRTC/TURN setup.
+`?qa_silent=1&qa_turn=1` on the launch page forwards silent forced-relay QA
+to the local export. Normal players retain their audio settings.
+
 ## Contributions
 
 The compact “Keep SteadyState alive!” link beside the home logo links to https://buy.stripe.com/8x200l9n9fRK0XXdv76g800.

@@ -1,0 +1,23 @@
+{
+  "bytes": 152157088,
+  "sha256": "5bbc75c543bf944e0aaaf665970720f28b8134287a1650704f6dc7c541b21522",
+  "wasmBytes": 38550519,
+  "parts": [
+    {
+      "name": "index.pck.5bbc75c543bf.part01",
+      "bytes": 50331648
+    },
+    {
+      "name": "index.pck.5bbc75c543bf.part02",
+      "bytes": 50331648
+    },
+    {
+      "name": "index.pck.5bbc75c543bf.part03",
+      "bytes": 50331648
+    },
+    {
+      "name": "index.pck.5bbc75c543bf.part04",
+      "bytes": 1162144
+    }
+  ]
+}
