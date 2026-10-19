@@ -92,10 +92,11 @@ body {
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
 <link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
-<script src="room-config.js?v=0119657a3a39"></script>
-<script src="rtc-qa.js?v=0119657a3a39"></script>
-<script src="viewport.js?v=0119657a3a39"></script>
-	</head>
+<script src="room-config.js?v=6c3da97087d5"></script>
+<script src="rtc-qa.js?v=6c3da97087d5"></script>
+<script src="viewport.js?v=6c3da97087d5"></script>
+	<link rel="stylesheet" href="loading.css?v=6c3da97087d5">
+</head>
 	<body>
 		<canvas id="canvas">
 			Your browser does not support the canvas tag.
@@ -107,15 +108,15 @@ body {
 
 		<div id="status">
 			<img id="status-splash" class="show-image--true fullsize--true use-filter--true" src="index.png" alt="">
-			<progress id="status-progress"></progress>
-			<div id="status-notice"></div>
+			<div id="loading-card"><div>Loading</div><progress id="status-progress" aria-label="Game download"></progress>
+			<div id="status-notice"></div></div>
 		</div>
 
-		<script src="website-pack.js?v=0119657a3a39"></script>
-<script src="website-pack-loader.js?v=0119657a3a39"></script>
+		<script src="website-pack.js?v=6c3da97087d5"></script>
+<script src="website-pack-loader.js?v=6c3da97087d5"></script>
 <script src="index.js"></script>
 		<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":152162736,"index.wasm":38550519},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":0,"emscriptenPoolSize":8,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":true,"fileSizes":{"index.pck":155228776,"index.wasm":38550519},"focusCanvas":true,"gdextensionLibs":[],"godotPoolSize":4};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine({...GODOT_CONFIG, onProgress: websiteProgress});
 
