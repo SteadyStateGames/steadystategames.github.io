@@ -1,23 +1,23 @@
 {
-  "bytes": 155228776,
-  "sha256": "6c3da97087d5bfb8b7a5c29b1964a89a3cd808143db43cc88b56e2979cd5a9e4",
+  "bytes": 155230680,
+  "sha256": "56cf68089bd6b91661e680c7668281c70eaf697b1be23b59688c25210a331567",
   "wasmBytes": 38550519,
   "parts": [
     {
-      "name": "index.pck.6c3da97087d5.part01",
+      "name": "index.pck.56cf68089bd6.part01",
       "bytes": 50331648
     },
     {
-      "name": "index.pck.6c3da97087d5.part02",
+      "name": "index.pck.56cf68089bd6.part02",
       "bytes": 50331648
     },
     {
-      "name": "index.pck.6c3da97087d5.part03",
+      "name": "index.pck.56cf68089bd6.part03",
       "bytes": 50331648
     },
     {
-      "name": "index.pck.6c3da97087d5.part04",
-      "bytes": 4233832
+      "name": "index.pck.56cf68089bd6.part04",
+      "bytes": 4235736
     }
   ]
 }
