@@ -67,6 +67,23 @@ Multiplayer uses the existing public signaling service and WebRTC/TURN setup.
 `?qa_silent=1&qa_turn=1` on the launch page forwards silent forced-relay QA
 to the local export. Normal players retain their audio settings.
 
+### Lunar Lunacy
+
+`/lunar-lunacy/` launches the project's own Godot Web export from
+`lunar-lunacy/game/`, the same way as Land Development: the resource pack is
+split into parts below GitHub's file limit and joined by
+`website-pack-loader.js` (global `WEBSITE_PACK`). On a wide screen the game
+keeps its portrait board centred and opens the shop on the right.
+
+To update, export the "Web" preset from the Lunar Lunacy project, then run:
+
+```text
+python tools/package_website.py --source <web-export-dir> --output <website-checkout>/lunar-lunacy/game
+```
+
+Bump `GAME_URL`'s `?v=` in `lunar-lunacy/play.js` to the new pack hash prefix.
+Online play uses the existing `lunar-lunacy-signal` Worker.
+
 ## Contributions
 
 The compact “Keep SteadyState alive!” link beside the home logo links to https://buy.stripe.com/8x200l9n9fRK0XXdv76g800.
