@@ -1,5 +1,5 @@
 // This is the project's own Web export, hosted on the studio website.
-const GAME_URL = './game/index.html?v=19ab793eecb6';
+const GAME_URL = './game/index.html?v=2dba9f801ba0';
 const launcher = document.querySelector('#launcher');
 const surface = document.querySelector('#game');
 const play = document.querySelector('#play');
